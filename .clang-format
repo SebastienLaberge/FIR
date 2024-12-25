@@ -1,0 +1,192 @@
+AlignAfterOpenBracket: AlwaysBreak
+AlignArrayOfStructures: Right
+AlignConsecutiveAssignments: None
+AlignConsecutiveBitFields: None
+AlignConsecutiveDeclarations: None
+AlignConsecutiveMacros: None
+AlignEscapedNewlines: true
+AlignOperands: DontAlign
+AlignTrailingComments: Always
+AllowAllArgumentsOnNextLine: false
+AllowAllParametersOfDeclarationOnNextLine: false
+AllowBreakBeforeNoexceptSpecifier: Never
+AllowShortBlocksOnASingleLine: Never
+AllowShortCaseLabelsOnASingleLine: false
+AllowShortCompoundRequirementOnASingleLine: false
+AllowShortEnumsOnASingleLine: false
+AllowShortFunctionsOnASingleLine: None
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLambdasOnASingleLine: None
+AllowShortLoopsOnASingleLine: false
+
+# Avoid breaking after return type unless the type is big
+# https://stackoverflow.com/questions/26635370/in-clang-format-what-do-the-penalties-do
+AlwaysBreakAfterReturnType: None
+PenaltyReturnTypeOnItsOwnLine: 1000
+
+AlwaysBreakBeforeMultilineStrings: false
+AlwaysBreakTemplateDeclarations: true
+BinPackArguments: false
+BinPackParameters: false
+BitFieldColonSpacing: Both
+BracedInitializerIndentWidth: 2
+BreakAdjacentStringLiterals: true
+BreakAfterAttributes: Leave
+BreakBeforeBinaryOperators: None
+BreakBeforeBraces: Allman
+BreakBeforeConceptDeclarations: Allowed
+BreakBeforeInlineASMColon: OnlyMultiline
+BreakBeforeTernaryOperators: false
+BreakConstructorInitializers: AfterColon
+BreakInheritanceList: AfterColon
+BreakStringLiterals: true
+ColumnLimit: 64
+CompactNamespaces: false
+ConstructorInitializerIndentWidth: 2
+ContinuationIndentWidth: 2
+Cpp11BracedListStyle: true
+DerivePointerAlignment: false
+DisableFormat: false
+EmptyLineAfterAccessModifier: Always
+EmptyLineBeforeAccessModifier: Always
+ExperimentalAutoDetectBinPacking: false
+FixNamespaceComments: false
+IndentAccessModifiers: false
+IndentCaseBlocks: true
+IndentCaseLabels: false
+IndentExternBlock: NoIndent
+IndentGotoLabels: false
+IndentPPDirectives: None
+IndentRequiresClause: true
+IndentWidth: 2
+IndentWrappedFunctionNames: false
+InsertNewlineAtEOF: true
+InsertTrailingCommas: None
+
+# Deprecated
+KeepEmptyLinesAtEOF: false
+KeepEmptyLinesAtTheStartOfBlocks: false
+
+LambdaBodyIndentation: Signature
+Language: Cpp
+LineEnding: LF
+MaxEmptyLinesToKeep: 1
+NamespaceIndentation: None
+
+PPIndentWidth: 2
+PackConstructorInitializers: Never
+PointerAlignment: Left
+QualifierAlignment: Left
+ReferenceAlignment: Left
+ReflowComments: true
+RemoveBracesLLVM: false
+RemoveParentheses: Leave
+RemoveSemicolon: false
+RequiresClausePosition: OwnLine
+RequiresExpressionIndentation: OuterScope
+SeparateDefinitionBlocks: Always
+ShortNamespaceLines: 0
+SkipMacroDefinitionBody: false
+SortIncludes: CaseSensitive
+SortUsingDeclarations: Lexicographic
+SpaceAfterCStyleCast: false
+SpaceAfterLogicalNot: false
+SpaceAfterTemplateKeyword: false
+SpaceAroundPointerQualifiers: Default
+SpaceBeforeAssignmentOperators: true
+SpaceBeforeCaseColon: false
+SpaceBeforeCpp11BracedList: false
+SpaceBeforeCtorInitializerColon: false
+SpaceBeforeInheritanceColon: false
+SpaceBeforeParens: ControlStatementsExceptControlMacros
+SpaceBeforeRangeBasedForLoopColon: true
+SpaceBeforeSquareBrackets: false
+SpaceInEmptyBlock: false
+SpaceInEmptyParentheses: false
+SpacesBeforeTrailingComments: 1
+SpacesInAngles: false
+SpacesInCStyleCastParentheses: false
+SpacesInContainerLiterals: false
+
+SpacesInParens: Never
+SpacesInSquareBrackets: false
+Standard: c++14
+TabWidth: 2
+UseTab: Never
+
+# Doesn't work well in editor
+#InsertBraces: true
+
+# Unused
+#AlignConsecutiveShortCaseStatements:
+#AccessModifierOffset: -2
+#BraceWrapping:
+#BreakArrays:
+#CommentPragmas:
+#IncludeBlocks: Preserve
+#IncludeCategories:
+#IncludeIsMainRegex:
+#IncludeIsMainSourceRegex:
+#IntegerLiteralSeparator:
+#QualifierOrder:
+#RawStringFormats:
+#SpacesInLineCommentPrefix:
+#Minimum: 1
+#Maximum: -1
+#SpaceBeforeParensOptions:
+#SpacesInParensOptions:
+#TypeNames:
+
+# Unused macros
+#AttributeMacros:
+#ForEachMacros:
+#IfMacros:
+#MacroBlockBegin:
+#MacroBlockEnd:
+#Macros:
+#NamespaceMacros:
+#StatementAttributeLikeMacros:
+#StatementMacros
+#TypenameMacros
+#WhitespaceSensitiveMacros
+
+# Unused from other languages
+#BreakAfterJavaFieldAnnotations:
+#JavaImportGroups:
+#JavaScriptQuotes:
+#JavaScriptWrapImports:
+#ObjCBinPackProtocolList:
+#ObjCBlockIndentWidth
+#ObjCBreakBeforeNestedBlockParam
+#ObjCPropertyAttributeOrder
+#ObjCSpaceAfterProperty
+#ObjCSpaceBeforeProtocolList
+#SortJavaStaticImport
+#SpaceBeforeJsonColon
+#VerilogBreakBetweenInstancePorts
+
+# Unused penalties
+#PenaltyBreakAssignment
+#PenaltyBreakBeforeFirstCallParameter
+#PenaltyBreakComment
+#PenaltyBreakFirstLessLess
+#PenaltyBreakOpenParenthesis
+#PenaltyBreakScopeResolution
+#PenaltyBreakString
+#PenaltyBreakTemplateDeclaration
+#PenaltyExcessCharacter
+#PenaltyIndentedWhitespace
+#PenaltyReturnTypeOnItsOwnLine
+
+# Unused from clang-format 19
+#AlignConsecutiveTableGenBreakingDAGArgColons
+#AlignConsecutiveTableGenCondOperatorColons
+#AlignConsecutiveTableGenDefinitionColons
+#AllowShortCaseExpressionOnASingleLine
+#BreakAfterReturnType
+#BreakFunctionDefinitionParameters
+#BreakTemplateDeclarations
+#KeepEmptyLines:
+#MainIncludeChar:
+#TableGenBreakInsideDAGArg:
+#TableGenBreakingDAGArgOperators:
