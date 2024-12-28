@@ -388,7 +388,7 @@ Params::Params(const char* paramFile)
 
   KeyParser kp;
 
-  kp.addStartKey("OSEM PARAMETERS");
+  kp.addStartKey("!OSEM PARAMETERS");
 
   // Main files
   kp.addKey("input projection file", &inputProjFile);
@@ -426,7 +426,7 @@ Params::Params(const char* paramFile)
     "attenuation correction factors",
     &attenCorrFactorsFile);
 
-  kp.addStopKey("END OF OSEM PARAMETERS");
+  kp.addStopKey("!END OF OSEM PARAMETERS");
 
   kp.parse(paramFile);
 

@@ -112,7 +112,7 @@ Params::Params(const char* paramFile)
 {
   KeyParser kp;
 
-  kp.addStartKey("FORWARD PROJECTION PARAMETERS");
+  kp.addStartKey("!FORWARD PROJECTION PARAMETERS");
 
   kp.addKey("input volume file", &inputVolFile);
   kp.addKey("scanner file", &scannerFile);
@@ -123,7 +123,7 @@ Params::Params(const char* paramFile)
 
   kp.addKey("mask volume file", &maskVolFile);
 
-  kp.addStopKey("END OF FORWARD PROJECTION PARAMETERS");
+  kp.addStopKey("!END OF FORWARD PROJECTION PARAMETERS");
 
   kp.parse(paramFile);
 

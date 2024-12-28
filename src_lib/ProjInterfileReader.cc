@@ -18,7 +18,7 @@ ProjInterfileReader::ProjInterfileReader(
 
   KeyParser kp;
 
-  kp.addStartKey("PROJECTION DATA PARAMETERS");
+  kp.addStartKey("!PROJECTION DATA PARAMETERS");
 
   kp.addKey("name of data file", &mDataFileName);
 
@@ -32,7 +32,7 @@ ProjInterfileReader::ProjInterfileReader(
     "number of tangential coordinates",
     &mHeader.nTangCoords);
 
-  kp.addStopKey("END OF PROJECTION DATA PARAMETERS");
+  kp.addStopKey("!END OF PROJECTION DATA PARAMETERS");
 
   kp.parse(headerFileName);
 
@@ -162,7 +162,7 @@ void ProjInterfileReader::writeProjInterfile(
 
   // Fill header file
 
-  writeKey(os, "PROJECTION DATA PARAMETERS");
+  writeKey(os, "!PROJECTION DATA PARAMETERS");
 
   writeKey(
     os,
@@ -183,7 +183,7 @@ void ProjInterfileReader::writeProjInterfile(
     "number of tangential coordinates",
     header.nTangCoords);
 
-  writeKey(os, "END OF PROJECTION DATA PARAMETERS");
+  writeKey(os, "!END OF PROJECTION DATA PARAMETERS");
 
   os.close();
 

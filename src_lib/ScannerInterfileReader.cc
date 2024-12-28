@@ -11,7 +11,7 @@ void readScannerInterfileHeader(
 
   KeyParser kp;
 
-  kp.addStartKey("SCANNER PARAMETERS");
+  kp.addStartKey("!SCANNER PARAMETERS");
 
   kp.addKey(
     "crystal dimensions XYZ in mm",
@@ -43,7 +43,7 @@ void readScannerInterfileHeader(
     "rSector inner radius in mm",
     &header.rSectorInnerRadius);
 
-  kp.addStopKey("END OF SCANNER PARAMETERS");
+  kp.addStopKey("!END OF SCANNER PARAMETERS");
 
   kp.parse(headerFileName);
 

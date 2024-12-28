@@ -139,7 +139,7 @@ VolInterfileReader::VolInterfileReader(
 {
   KeyParser kp;
 
-  kp.addStartKey("INTERFILE");
+  kp.addStartKey("!INTERFILE");
 
   // Parameters for interfile reader
   kp.addKey("name of data file", &mParams.dataFileName);
@@ -188,7 +188,7 @@ VolInterfileReader::VolInterfileReader(
   // Number of frames
   kp.addKey("number of time frames", &mHeader.nFrames);
 
-  kp.addStopKey("END OF INTERFILE");
+  kp.addStopKey("!END OF INTERFILE");
 
   // Set defaults
   mParams.setDefaults();
@@ -561,7 +561,7 @@ static void writeVolInterfileHeader(
     error("Couldn't create file ", outputVolHeaderFile);
   }
 
-  writeKey(stream, "INTERFILE");
+  writeKey(stream, "!INTERFILE");
 
   stream << std::endl;
   writeKey(stream, "name of data file", params.dataFileName);
@@ -622,7 +622,7 @@ static void writeVolInterfileHeader(
   writeKey(stream, "number of time frames", header.nFrames);
 
   stream << std::endl;
-  writeKey(stream, "END OF INTERFILE");
+  writeKey(stream, "!END OF INTERFILE");
 }
 
 void VolInterfileReader::writeVolInterfile(

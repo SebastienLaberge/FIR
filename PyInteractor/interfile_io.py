@@ -45,12 +45,12 @@ def read_interfile(
 
             raise ValueError('Interfile header is empty')
 
-        if pairs[0][0] != file_type:
+        if pairs[0][0] != '!' + file_type:
 
             raise ValueError(
                 f'Interfile header is not of type {file_type}')
 
-        if pairs[-1][0] != 'END OF ' + file_type:
+        if pairs[-1][0] != '!END OF ' + file_type:
 
             raise ValueError('Invalid interfile header')
 
@@ -79,6 +79,6 @@ def write_interfile(
             lines)
 
         fd.writelines(
-            [file_type + " :=\n"] +
+            ["!" + file_type + " :=\n"] +
             list(processed_lines) +
-            ["END OF " + file_type + " :=\n"])
+            ["!END OF " + file_type + " :=\n"])
