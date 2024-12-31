@@ -59,13 +59,7 @@ def _read_volume_data(
     vol_array = \
         np.fromfile(vol_data_file, dtype=dtype).reshape(shape)
 
-    # Rotation of 180 degrees around x axis:
-    # Flip y axis so that it points down
-    # Flip z axis so that it points into the screen
-    corrected_array = \
-        np.flip(np.flip(vol_array, axis=-2), axis=-3)
-
-    return corrected_array
+    return vol_array
 
 
 def read_interfile_frames_as_array(
@@ -148,11 +142,5 @@ def _write_volume_data(
         array: np.ndarray,
         vol_data_file: str,
         voxel_type: str):
-
-    # Rotation of 180 degrees around x axis:
-    # Flip y axis so that it points up
-    # Flip z axis so that it points out of the screen
-    # corrected_array = np.flip(np.flip(array, axis=-2), axis=-3)
-    # corrected_array.astype(voxel_type).tofile(vol_data_file)
 
     array.astype(voxel_type).tofile(vol_data_file)

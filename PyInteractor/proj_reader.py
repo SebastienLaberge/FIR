@@ -73,8 +73,6 @@ class ProjReader:
         viewgram = \
             self.data[offset:offset+size].reshape(shape).T
 
-        viewgram = np.flipud(viewgram)
-
         return viewgram
 
     def get_sinogram(self, segment: int, axial_coord: int):
@@ -116,7 +114,5 @@ class ProjReader:
             np.stack(
                 [get_view_line(view)
                  for view in range(self.n_views)]).T
-
-        sinogram = np.flipud(sinogram)
 
         return sinogram
