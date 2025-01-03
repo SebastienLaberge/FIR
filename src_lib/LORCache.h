@@ -32,13 +32,16 @@ public:
 
 private:
 
-  int nSubsets, nViewsPerSubset;
-  int nCrystalsPerRing, mSegOffset;
+  int mNSubsets, mNViewsPerSubset;
+  int mNCrystalsPerRing, mSegOffset;
+
+  // [segment]
+  int* mNBinsPerViewForEachSegment;
+
+  // [subset][segment][bin]
+  LOR*** mCrystalArray;
 
   int mCurrentSubset, mCurrentSegment;
-  int nBinsPerViewForCurrentSegment;
-  int* nBinsPerViewVector;
-
-  LOR*** mCrystalArray;
+  int mNBinsPerViewForCurrentSegment;
   LOR* mCrystalArrayForCurrentSubsetAndSegment;
 };
