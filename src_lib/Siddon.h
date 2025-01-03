@@ -22,7 +22,7 @@ public:
       types::SpatialCoord,
       types::SpatialCoord>;
 
-  Siddon(const VolData& vol, const ScannerData& scanner);
+  Siddon(const VolData& vol);
 
   ~Siddon();
 
@@ -34,7 +34,8 @@ public:
   // Compute LOR path from scanner coordinates of crystal pair
   // Provide path element vector for current thread
   // Returns true if LOR crosses volume, false otherwise
-  bool computePath(
+  bool computePathBetweenCrystals(
+    const ScannerData& scanner,
     int crysAxialCoord1,
     int crysAngCoord1,
     int crysAxialCoord2,
@@ -44,7 +45,7 @@ public:
   // Compute LOR path from spatial coordinates of crystal pair
   // Provide path element vector for current thread
   // Returns true if LOR crosses volume, false otherwise
-  bool computePathCore(
+  bool computePath(
     types::SpatialCoord crys1_X,
     types::SpatialCoord crys1_Y,
     types::SpatialCoord crys1_Z,

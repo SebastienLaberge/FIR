@@ -8,7 +8,7 @@ struct VolHeader
   // Number of voxels along each dimension
   types::VolSize volSize;
 
-  // Common spatial extent of all voxels along each dimension
+  // Spatial extent of each voxel along each dimension
   types::VoxelExtent voxelExtent;
 
   // Volume offset
@@ -30,7 +30,7 @@ struct VolHeader
 
   // Check validity of values and throw if there is a problem
   // Note: Must executed after filling with specific values
-  void check();
+  void check() const;
 };
 
 // Derived volume parameters

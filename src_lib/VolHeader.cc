@@ -2,7 +2,7 @@
 
 #include <console.h>
 
-void VolHeader::check()
+void VolHeader::check() const
 {
   if (
     volSize.nPixelsX <= 0 || //

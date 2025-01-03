@@ -43,6 +43,9 @@ public:
     ConstructionMode mode = ConstructionMode::READ_DATA,
     types::VoxelValue initValue = 0.0);
 
+  // From header structure
+  VolData(const VolHeader& header);
+
   // Destructor
   ~VolData();
 

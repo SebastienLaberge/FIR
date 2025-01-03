@@ -30,6 +30,17 @@ VolData::VolData(
   copy(vol, mode, initValue);
 }
 
+VolData::VolData(const VolHeader& header):
+  VolData{}
+{
+  header.check();
+  mHeader = header;
+
+  mGeometry.fill(mHeader);
+
+  allocate();
+}
+
 VolData::~VolData()
 {
   deallocate();

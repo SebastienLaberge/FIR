@@ -17,14 +17,8 @@ constexpr int X_DIM{0};
 constexpr int Y_DIM{1};
 constexpr int Z_DIM{2};
 
-Siddon::Siddon(const VolData& vol, const ScannerData& scanner)
+Siddon::Siddon(const VolData& vol)
 {
-  // Get access to crystal positions
-  mCrystalXYPositionVector = //
-    scanner.getCrystalXYPositionVector();
-  mSliceZPositionVector = //
-    scanner.getSliceZPositionVector();
-
   const auto& header = vol.getHeader();
 
   const auto& volSize = header.volSize;
@@ -91,24 +85,31 @@ types::PathElement* Siddon::getThreadLocalPathElements() const
     getCurrentThread() * mMaxPathLength;
 }
 
-bool Siddon::computePath(
+bool Siddon::computePathBetweenCrystals(
+  const ScannerData& scanner,
   int crysAxialCoord1,
   int crysAngCoord1,
   int crysAxialCoord2,
   int crysAngCoord2,
   types::PathElement* pathElementsArray) const
 {
-  return computePathCore(
-    mCrystalXYPositionVector[crysAngCoord1].x,
-    mCrystalXYPositionVector[crysAngCoord1].y,
-    mSliceZPositionVector[crysAxialCoord1],
-    mCrystalXYPositionVector[crysAngCoord2].x,
-    mCrystalXYPositionVector[crysAngCoord2].y,
-    mSliceZPositionVector[crysAxialCoord2],
+  // Get access to crystal positions
+  const auto* crystalXYPositionVector =
+    scanner.getCrystalXYPositionVector();
+  const auto* sliceZPositionVector =
+    scanner.getSliceZPositionVector();
+
+  return computePath(
+    crystalXYPositionVector[crysAngCoord1].x,
+    crystalXYPositionVector[crysAngCoord1].y,
+    sliceZPositionVector[crysAxialCoord1],
+    crystalXYPositionVector[crysAngCoord2].x,
+    crystalXYPositionVector[crysAngCoord2].y,
+    sliceZPositionVector[crysAxialCoord2],
     pathElementsArray);
 }
 
-bool Siddon::computePathCore(
+bool Siddon::computePath(
   types::SpatialCoord crys1X,
   types::SpatialCoord crys1Y,
   types::SpatialCoord crys1Z,

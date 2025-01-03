@@ -6,6 +6,7 @@ set(TEST_EXECUTABLE ${PROJECT_NAME}_RunTests)
 add_executable(${TEST_EXECUTABLE}
 ProjHeaderUnitTest.cc
 ProjInterfileReaderUnitTest.cc
+SiddonUnitTest.cc
 )
 
 target_compile_features(${TEST_EXECUTABLE} PUBLIC ${FLAGS})

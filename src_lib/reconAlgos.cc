@@ -12,6 +12,7 @@ inline std::tuple<int, types::VoxelValue> getLine(
   int index,
   LORCache& cache,
   const Siddon& siddon,
+  const ScannerData& scanner,
   types::PathElement* threadLocalPathElements,
   bool firstIter,
   const VolData& outputVol)
@@ -30,7 +31,8 @@ inline std::tuple<int, types::VoxelValue> getLine(
   if (validSaved)
   {
     // Apply siddon algorithm
-    const auto valid = siddon.computePath(
+    const auto valid = siddon.computePathBetweenCrystals(
+      scanner,
       crystalAxialCoord1,
       crystalAngCoord1,
       crystalAxialCoord2,
@@ -87,7 +89,7 @@ void OSEM(
 
   // Initialize siddon algorithm and LOR list
   LORCache cache(inputProj, params.nSubsets);
-  Siddon siddon(outputVol, scanner);
+  Siddon siddon(outputVol);
 
   // Cut circle at the center of the image
   operations::cutCircle(outputVol, params.cutRadius);
@@ -134,6 +136,7 @@ void OSEM(
             index,
             cache,
             siddon,
+            scanner,
             threadLocalPathElements,
             iter == 0,
             outputVol);
@@ -220,7 +223,7 @@ void OSEM_ResoReco(
 
   // Initialize siddon algorithm and LOR list
   LORCache cache(inputProj, params.nSubsets);
-  Siddon siddon(outputVol, scanner);
+  Siddon siddon(outputVol);
 
   // Initialize empty volume for back-projection
   VolData backProj(
@@ -287,6 +290,7 @@ void OSEM_ResoReco(
             index,
             cache,
             siddon,
+            scanner,
             threadLocalPathElements,
             iter == 0,
             outputVol);

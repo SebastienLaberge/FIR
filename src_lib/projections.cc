@@ -20,7 +20,7 @@ void forward(
   // Check proj data dimensions
   scanner.checkProjData(outputProj);
 
-  Siddon siddon(inputVol, scanner);
+  Siddon siddon(inputVol);
 
   LOOP_SEG(seg, outputProj)
   {
@@ -53,7 +53,8 @@ void forward(
         const auto [crystalAngCoord1, crystalAngCoord2] =
           outputProj.getCrystalAngCoord(view, tangCoord);
 
-        siddon.computePath(
+        siddon.computePathBetweenCrystals(
+          scanner,
           crystalAxialCoord1,
           crystalAngCoord1,
           crystalAxialCoord2,
@@ -106,7 +107,7 @@ void backward(
   outputVol.checkNFrames(nSubsets);
 
   // Initialize siddon algorithm and LOR list
-  Siddon siddon(outputVol, scanner);
+  Siddon siddon(outputVol);
   LORCache cache(inputProj, nSubsets);
 
   echo("Back-projection");
@@ -163,7 +164,8 @@ void backward(
         // TODO: Check if valid should be used
 
         // Apply siddon algorithm
-        siddon.computePath(
+        siddon.computePathBetweenCrystals(
+          scanner,
           crystalAxialCoord1,
           crystalAngCoord1,
           crystalAxialCoord2,
