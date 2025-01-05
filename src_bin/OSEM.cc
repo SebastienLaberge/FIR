@@ -160,7 +160,7 @@ int main(int argc, char** argv)
       }
     }
 
-    // Check if attenuation factors file is exists if provided
+    // Check if attenuation factors file exists if provided
     bool attenCorrFactorsFileExists;
     if (attenCorrFactorsFileProvided)
     {

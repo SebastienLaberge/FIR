@@ -4,7 +4,11 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
+#include <algorithm>
 #include <array>
+#include <cmath>
+#include <numeric>
+#include <vector>
 
 namespace
 {
@@ -15,7 +19,7 @@ void CheckPath(
   const Siddon& siddon,
   std::array<double, 3> point1,
   std::array<double, 3> point2,
-  std::vector<double> expectedCoords,
+  std::vector<int> expectedCoords,
   std::vector<double> expectedLengths)
 {
   const auto pathElementsArray =
@@ -53,7 +57,9 @@ void CheckPath(
     const auto actualLength =
       pathElementsArray[pathIndex].length;
     const auto expectedLength = expectedLengths[pathIndex];
-    ASSERT_LT(std::abs(actualLength - expectedLength), TOLERANCE)
+    ASSERT_LT(
+      std::abs(actualLength - expectedLength),
+      TOLERANCE)
       << "For test at line " << line << ", "
       << "invalid length at path index " << pathIndex << " "
       << "(expected value: " << expectedLength << ", "
@@ -297,4 +303,84 @@ TEST(SiddonUnitTest, OrthogonalPaths)
     {-voxelExtentX, -voxelExtentY, zSlice0},
     {9, 0},
     {voxelExtentZ, voxelExtentZ / 2.0});
+}
+
+TEST(SiddonUnitTest, LongPaths)
+{
+  const auto volSizeX = 512;
+  const auto volSizeY = 384;
+  const auto volSizeZ = 1;
+
+  const auto voxelExtentX = 1.0;
+  const auto voxelExtentY = 2.0;
+  const auto voxelExtentZ = 1.0;
+
+  const auto volOffsetX = -(volSizeX - 1) * voxelExtentX / 2.0;
+  const auto volOffsetY = -(volSizeY - 1) * voxelExtentY / 2.0;
+  const auto volOffsetZ = 0.0;
+
+  const auto nFrames = 1;
+
+  VolData vol({
+    {    volSizeX,     volSizeY,     volSizeZ},
+    {voxelExtentX, voxelExtentY, voxelExtentZ},
+    {  volOffsetX,   volOffsetY,   volOffsetZ},
+    nFrames
+  });
+
+  Siddon siddon(vol);
+
+  const auto leftPlane = volOffsetX - voxelExtentX;
+  const auto rightPlane =
+    leftPlane + (volSizeX + 1) * voxelExtentX;
+
+  const auto topPlane = volOffsetY - voxelExtentY;
+  const auto bottomPlane =
+    topPlane + (volSizeY + 1) * voxelExtentY;
+
+  const auto zSlice0 = 0.0;
+
+  // Second line
+
+  std::vector<int> expectedIndices1(volSizeX);
+  std::iota(
+    expectedIndices1.begin(),
+    expectedIndices1.end(),
+    volSizeX);
+
+  std::vector<double> expectedLengths1(volSizeX, voxelExtentX);
+
+  CheckPath(
+    __LINE__,
+    siddon,
+    {leftPlane, volOffsetY + voxelExtentY, zSlice0},
+    {rightPlane, volOffsetY + voxelExtentY, zSlice0},
+    expectedIndices1,
+    expectedLengths1);
+
+  // Second column
+
+  std::vector<int> expectedIndices2(volSizeY);
+  std::iota(
+    expectedIndices2.begin(),
+    expectedIndices2.end(),
+    0);
+  std::transform(
+    expectedIndices2.cbegin(),
+    expectedIndices2.cend(),
+    expectedIndices2.begin(),
+    [](const auto& i)
+    {
+      return volSizeX * i + 1;
+    });
+
+  std::vector<double> expectedLengths2(volSizeY, voxelExtentY);
+
+  CheckPath(
+    __LINE__,
+    siddon,
+    {volOffsetX + voxelExtentX, topPlane, zSlice0},
+    {volOffsetX + voxelExtentX, bottomPlane, zSlice0},
+    expectedIndices2,
+    expectedLengths2);
 }
