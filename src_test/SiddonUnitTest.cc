@@ -25,7 +25,7 @@ void CheckPath(
   const auto pathElementsArray =
     siddon.getThreadLocalPathElements();
 
-  siddon.computePath(
+  const auto crosses = siddon.computePath(
     point1[0],
     point1[1],
     point1[2],
@@ -33,6 +33,9 @@ void CheckPath(
     point2[1],
     point2[2],
     pathElementsArray);
+
+  const auto expectedCrossing = !expectedCoords.empty();
+  ASSERT_EQ(crosses, expectedCrossing);
 
   const auto expectedLength = expectedCoords.size();
   auto actualLength = 0;
@@ -113,6 +116,40 @@ TEST(SiddonUnitTest, OrthogonalPaths)
 
   const auto frontPlane = zSlice0 - voxelExtentZ;
   const auto backPlane = zSlice1 + voxelExtentZ;
+
+  // No crossing
+
+  CheckPath(
+    __LINE__,
+    siddon,
+    {leftPlane, topPlane, zSlice0},
+    {rightPlane, topPlane, zSlice0},
+    {},
+    {});
+
+  CheckPath(
+    __LINE__,
+    siddon,
+    {leftPlane, bottomPlane, zSlice0},
+    {rightPlane, bottomPlane, zSlice0},
+    {},
+    {});
+
+  CheckPath(
+    __LINE__,
+    siddon,
+    {leftPlane, topPlane, zSlice0},
+    {leftPlane, bottomPlane, zSlice0},
+    {},
+    {});
+
+  CheckPath(
+    __LINE__,
+    siddon,
+    {rightPlane, topPlane, zSlice0},
+    {rightPlane, bottomPlane, zSlice0},
+    {},
+    {});
 
   // Horizontal, slice 0
 
